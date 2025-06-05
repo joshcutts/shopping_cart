@@ -100,6 +100,7 @@ router.get("/products", (req, res, next) => {
 
 router.post("/products", (req, res, next) => {
   const { title, price, quantity } = req.body;
+  console.log(`making product... ${title}`)
   Product.create({ title, price, quantity })
     .then((product) => res.json(product))
     .catch((err) => next(err));
@@ -127,7 +128,7 @@ router.put("/products/:id", (req, res) => {
 
 router.delete("/products/:id", (req, res, next) => {
   const productId = req.params.id;
-  Product.findByIdAndRemove(productId)
+  Product.findByIdAndDelete(productId)
     .then(() => {
       res.json();
     })
@@ -195,5 +196,28 @@ router.get("/cart", (req, res, next) => {
     })
     .catch(next);
 });
+
+router.patch("/cart/:productId", (req, res, next) => {
+  const productId = req.params.productId;
+  const { title, price } = req.body;
+  console.log(productId, title, price)
+  const update = {};
+  if (title !== undefined) update.title = title;
+  if (price !== undefined) update.price = price;
+
+  CartItem.findOneAndUpdate(
+    { productId },
+    update,
+    { new: true }
+  )
+    .then((updatedItem) => {
+      if (!updatedItem) {
+        return res.status(404).json({ error: "Cart item not found" });
+      }
+      res.json(updatedItem);
+    })
+    .catch(next);
+});
+
 
 module.exports = router;
