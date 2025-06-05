@@ -16,11 +16,12 @@ it("updates input fields for edit product form when user types", async () => {
         />)
   const user = userEvent.setup()
 
-  // initally populate with current product
+  // populate fields with current product
   expect(screen.getByRole('textbox', {name: 'Product Name'})).toHaveValue('Amazon Kindle E-reader')
   expect(screen.getByLabelText(/Product Price/i)).toHaveValue(79.99)
   expect(screen.getByLabelText(/Product Quantity/i)).toHaveValue(5)
 
+  // updates to input fields
   const productNameInput = screen.getByRole('textbox', {name: 'Product Name'})
   await user.clear(productNameInput)
   await user.type(productNameInput, 'Fire Tablet')
