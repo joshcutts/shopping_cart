@@ -1,23 +1,28 @@
+import { useState } from 'react'
 import type { NewProduct } from "../types/types";
 import AddProductForm from "./AddProductForm"
 import AddFormButton from "./AddFormButton"
 
 interface ToggleableProductFormProps {
-  displayAddForm: boolean;
-  onCancel: () => void;
   onSubmit: (newProduct: NewProduct, callback?: () => void) => Promise<void>
-  onClick: () => void,
 }
 
-const ToggleableProductForm = ({ displayAddForm, onCancel, onSubmit, onClick}: ToggleableProductFormProps)  => {
+const ToggleableProductForm = ({ onSubmit }: ToggleableProductFormProps)  => {
+  const [isAddProductFormShown, setIsAffProductFormShown] = useState(false)
+
+  const toggleAddProductForm = () => {
+    setIsAffProductFormShown(!isAddProductFormShown)
+  }
+
   return (
     <>
-    {displayAddForm ?
+    {isAddProductFormShown ?
       <AddProductForm
-        onCancel={onCancel}
+        onCancel={toggleAddProductForm}
         onSubmit={onSubmit}
+        toggleForm={toggleAddProductForm}
       /> : 
-      <AddFormButton onClick={onClick}/>
+      <AddFormButton onClick={toggleAddProductForm}/>
     }
     </>
   )

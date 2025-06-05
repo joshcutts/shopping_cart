@@ -4,6 +4,7 @@ import type { NewProduct } from "../types/types.ts"
 interface AddProductFormProps {
   onCancel: () => void
   onSubmit: (newProduct: NewProduct, callback?: () => void) => Promise<void>
+  toggleForm: () => void;
 }
 
 interface FormData {
@@ -12,7 +13,7 @@ interface FormData {
   quantity: string;
 }
 
-const AddProductForm = ({ onCancel, onSubmit }: AddProductFormProps) => {
+const AddProductForm = ({ onCancel, onSubmit, toggleForm }: AddProductFormProps) => {
   const [formData, setFormData] = useState<FormData>({
     title: '',
     price: '',
@@ -44,6 +45,7 @@ const AddProductForm = ({ onCancel, onSubmit }: AddProductFormProps) => {
       price: Number(formData.price),
       quantity: Number(formData.quantity)
     } as NewProduct, resetForm)
+    toggleForm()
   }
 
   return (

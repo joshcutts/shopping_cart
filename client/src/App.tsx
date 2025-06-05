@@ -8,7 +8,6 @@ import { decrementProductQuantity, incrementCartQuantity, updateCart } from './u
 
 
 const App = () => {
-  const [displayAddForm, setDisplayAddForm] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
   const [cart, setCart] = useState<CartItem[]>([])
 
@@ -35,19 +34,10 @@ const App = () => {
     fetchCart()
   }, [])
 
-  const handleHideAddProductForm = () => {
-    setDisplayAddForm(false)
-  }
-
-  const handleShowAddProductForm = () => {
-    setDisplayAddForm(true)
-  }
-
   const handleSubmitProduct = async (newProduct: NewProduct, callback?: () => void) => {
     try {
       const returnedProduct = await submitProduct(newProduct)
       setProducts(prev => prev.concat(returnedProduct as Product))
-      handleHideAddProductForm()
       if (callback) callback()
     } catch (e) {
       console.log(e)
@@ -115,12 +105,7 @@ const App = () => {
           onAddToCart={handleAddToCart}
           onEdit={handleEdit}
         />
-        <ToggleableProductForm
-          displayAddForm={displayAddForm}
-          onCancel={handleHideAddProductForm}
-          onSubmit={handleSubmitProduct}
-          onClick={handleShowAddProductForm}
-        />  
+        <ToggleableProductForm onSubmit={handleSubmitProduct} />  
       </main>
     </>
   )
