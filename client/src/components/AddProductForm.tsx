@@ -69,7 +69,7 @@ const AddProductForm = ({ onCancel, onSubmit, toggleForm }: AddProductFormProps)
             type="number"
             id="product-price"
             name="product-price"
-            min="0"
+            min="0.01"
             step="0.01"
             value={formData.price}
             aria-label="Product Price"
@@ -84,6 +84,7 @@ const AddProductForm = ({ onCancel, onSubmit, toggleForm }: AddProductFormProps)
             id="product-quantity"
             name="product-quantity"
             min="0"
+            step="1"
             value={formData.quantity}
             aria-label='Product Quantity'
             onChange={(e) => handleChange(e)}
