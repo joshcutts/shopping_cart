@@ -124,6 +124,6 @@ it('adding product closes the form and product appears in products', async () =>
 
   expect(updatedTitle).toHaveTextContent('Dune')
   expect(updatedPrice).toHaveTextContent("29.99")
-    expect(updatedQuantity).toHaveTextContent("5")
+  expect(updatedQuantity).toHaveTextContent("5")
 
 })
