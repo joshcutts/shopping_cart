@@ -105,7 +105,7 @@ const App = () => {
           onAddToCart={handleAddToCart}
           onEdit={handleEdit}
         />
-        <ToggleableProductForm onSubmit={handleSubmitProduct} />  
+          <ToggleableProductForm onSubmit={handleSubmitProduct} />  
       </main>
     </>
   )

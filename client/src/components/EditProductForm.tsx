@@ -59,6 +59,7 @@ const EditProductForm = ({ product, onHideEditForm, onEdit }: EditProductFormPro
                     value={formData.price || ''}
                     aria-label="Product Price"
                     min="0.01"
+                    step="0.01"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -71,6 +72,7 @@ const EditProductForm = ({ product, onHideEditForm, onEdit }: EditProductFormPro
                     value={formData.quantity || '0'}
                     aria-label="Product Quantity"
                     min="0"
+                    step="1"
                     onChange={(e) => handleChange(e)}
                   />
                 </div>

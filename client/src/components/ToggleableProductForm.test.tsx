@@ -1,10 +1,11 @@
-import App from "../App";
+import ToggleableProductForm from "./ToggleableProductForm";
 import {render, screen } from "@testing-library/react"
-import {it, expect} from "vitest"
 import userEvent from '@testing-library/user-event';
 
 it("Add product button click displays form, clicking cancel displays button removes form", async () => {
-  render(<App />)
+  render(<ToggleableProductForm 
+          onSubmit={vi.fn()}
+        />)
   const user = userEvent.setup()
 
   // not initially visible
